@@ -22,6 +22,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch(err => console.error('Error connecting to database:', err));
 
 console.log("Hello URL Shortener!");
+console.log("Base URL:", process.env.BASE_URL);
+
 
 app.get('/', (req, res) => {
     res.send("hello hello");
