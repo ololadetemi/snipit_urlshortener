@@ -19,6 +19,7 @@ export const shortenUrl = async (req, res) => {
 
         // Generate short URL code, either using the custom slug or nanoid
         const shortUrlCode = customSlug ? customSlug : nanoid(8);
+        const shortUrl = `${process.env.BASE_URL}/${shortUrlCode}`;
 
         // Check if the custom slug already exists in the database
         if (customSlug) {
