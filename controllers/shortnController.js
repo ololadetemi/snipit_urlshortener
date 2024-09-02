@@ -1,28 +1,33 @@
-const { nanoid } = require('nanoid');
-const shortnUrl = require('../models/shortnController');
-const generateQRCode = ('../utility/qrCodeGenerator');
+import { nanoid } from 'nanoid';
+import shortnUrl from '../models/shortn.js';
+import generateQRCode from  '../utility/qrCodeGenerator.js';
 
 const BASE_URL = process.env.BASE_URL
 
-exports.shortenUrl = async (req, res) => {
-    const { originalUrl }  = req.body;
+export const shortenUrl = async (req, res) => {
+    const { originalUrl, customSlug }  = req.body;
     try {
         let url = await shortnUrl.findOne({ originalUrl });
         if (url) {
             return res.status(200).json({
                 shortUrl: `${BASE_URL}/${url.shortUrl}`,
-                qrCode: url.qrcode,
+                qrCode: url.qrCode,
                 clicks: url.clicks
             });
         }
 
-        const shortUrlCode = nanoid(6);
+        const shortUrlCode = customSlug ? customSlug : nanoid(6);
+        const existingSlug = await shortnUrl.findOne({ customSlug: shortUrlCode });
+        if (existingSlug) {
+            return res.status(400).json({ error: 'Custom slug already exists, please choose another one.' });
+        }
         const qrCode = await generateQRCode(`${BASE_URL}/${shortUrlCode}`);
+        console.log('QR Code:', qrCode)
 
         url = new shortnUrl({
             originalUrl,
             shortUrl:shortUrlCode,
-            qrcode: qrCode
+            qrCode: qrCode
         });
 
         await url.save();
@@ -39,7 +44,7 @@ exports.shortenUrl = async (req, res) => {
     }
 };
 
-exports.redirectToOriginalUrl = async (req, res) => {
+export const redirectToOriginalUrl = async (req, res) => {
     const { shortUrl } = req.params;
 
     try{
@@ -59,7 +64,7 @@ exports.redirectToOriginalUrl = async (req, res) => {
     }
 };
 
-exports.getAnalytics = async (req, res) => {
+export const getAnalytics = async (req, res) => {
     const { shortUrl } = req.params;
 
     try {
@@ -69,7 +74,7 @@ exports.getAnalytics = async (req, res) => {
                 originalUrl: url.originalUrl,
                 shortUrl: `${BASE_URL}/${url.shortUrl}`,
                 clicks: url.clicks,
-                qrcode: url.qrcode
+                qrcode: url.qrCode
             });
         } else {
             return res.status(404).json({ error: 'No URL found' });

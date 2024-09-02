@@ -1,8 +1,9 @@
-const QRCode = require('qrcode');
+import  QRCode from 'qrcode';
 
-const generateQRCode = async(url) => {
+const generateQRCode = async (url) => {
     try {
         const qrCodeData = await QRCode.toDataURL(url);
+        console.log('QR Code generated:', qrCodeData)
         return qrCodeData;
     } catch (error) {
         console.error('Error generating qr code:', error);
@@ -10,4 +11,4 @@ const generateQRCode = async(url) => {
     }
 }
 
-module.exports = generateQRCode;
+export default generateQRCode;

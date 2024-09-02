@@ -1,14 +1,15 @@
-const express = require('express');
+import  express from 'express';
+import { shortenUrl, redirectToOriginalUrl, getAnalytics } from '../controllers/shortnController.js';
+import validateUrls from '../Middlewares/validateUrls.js';
+
 const router = express.Router();
-const shortnController = require('../controllers/shortnController');
-const validateUrls = require('../Middlewares/validateUrls');
 
 
 //Route to shorten URL
-router.post('/shorten', shortnController.shortenUrl);
+router.post('/shorten', validateUrls, shortenUrl);
 //To redirect to original url
-router.get(':/shortUrl', shortnController.redirectToOriginalUrl);
+router.get('/:shortUrl', redirectToOriginalUrl);
 //To get analytics for shortened URL
-router.get('/analytics/:shortUrl', shortnController.getAnalytics);
+router.get('/analytics/:shortUrl', getAnalytics);
 
-module.exports = router;
+export default router;

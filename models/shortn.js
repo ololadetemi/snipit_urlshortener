@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { nanoid } = require('nanoid');
+import  mongoose from 'mongoose';
+import { nanoid } from 'nanoid';
 
 const shortnUrlSchema = new mongoose.Schema({
     originalUrl: {
@@ -23,8 +23,8 @@ const shortnUrlSchema = new mongoose.Schema({
     customSlug: {
         type: String,
         required: false,
-        unique: true
+        unique: false
     },
 }, { timestamps: true});
 
-module.exports = mongoose.model('shortnUrl', shortnUrlSchema);
+export default mongoose.model('shortnUrl', shortnUrlSchema);
