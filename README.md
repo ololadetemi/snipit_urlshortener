@@ -1,7 +1,9 @@
 *SnipIt URL Shortener*
-SnipIt is a URL shortening service built with Node.js, Express, and MongoDB. It allows users to shorten long URLs, create custom slugs, and track link analytics such as click counts. The service also generates corresponding QR codes for the shortened URLs.
+
+SnipIt is a URL-shortening service built with Node.js, Express, and MongoDB. It allows users to shorten long URLs, create custom slugs, and track link analytics such as click counts. The service also generates corresponding QR codes for the shortened URLs.
 
 *Features*
+
 Shorten URLs: Convert long URLs into concise, easy-to-share links.
 Custom Slugs: Create personalized slugs for shortened URLs.
 Analytics: Track the number of clicks for each shortened URL.
@@ -9,6 +11,7 @@ QR Code Generation: Automatically generate a QR code for each shortened URL.
 RESTful API: Use a RESTful API to interact with the service programmatically.
 
 Installation
+
 Clone the repository:
 git clone https://github.com/ololadetemi/snipit_urlshortener.git
 cd snipit_urlshortener
