@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+  background-color: navy;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.App-header {
+  margin-bottom: 20px;
+}
+
+.scissors-logo {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.url-input {
+  padding: 10px;
+  font-size: 1rem;
+  width: 60%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.shorten-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: white;
+  color: navy;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.shorten-button:hover {
+  background-color: #f0f0f0;
+}
+
+.results {
+  margin-top: 20px;
+  color: white;
+}
+
+.qr-code {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.qr-code canvas {
+  margin-top: 10px;
+}
+
+#animation-area {
+  margin-top: 40px;
+  height: 50px;
+  width: 100%;
+  position: relative;
+}
+
+.scissors {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  font-size: 2rem;
+  transform: translateY(-50%);
+  animation: cut-animation 2s forwards;
+}
+
+@keyframes cut-animation {
+  from {
+    left: 0;
+  }
+  to {
+    left: 100%;
+  }
+}
